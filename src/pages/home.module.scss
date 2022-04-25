@@ -1,1 +1,55 @@
-// TODO
+.loadMoreButton {
+  background: transparent;
+  border: 0;
+
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--pink-600);
+}
+
+.post {
+  display: block;
+  margin-bottom: 48px;
+
+  &:hover {
+    h1 {
+      color: var(--pink-600);
+    }
+  }
+
+  h1 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    transition: color 0.3s;
+  }
+
+  p {
+    font-size: 18px;
+    color: var(--gray-100);
+    margin-bottom: 24px;
+  }
+
+  .details {
+    display: flex;
+
+    div {
+      display: flex;
+      align-items: center;
+
+      p {
+        margin: 0;
+      }
+
+      p, time {
+        margin-left: 9px;
+      }
+    }
+
+    div + div {
+      margin-left: 26px;
+    }
+  }
+}
+
+

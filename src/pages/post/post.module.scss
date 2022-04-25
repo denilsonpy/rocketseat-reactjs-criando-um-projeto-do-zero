@@ -1,1 +1,57 @@
-// TODO
+.container {
+  padding-bottom: 80px;
+
+  img {
+    display: block;
+    max-width: 1440px;
+    margin: 0  auto 80px auto;
+  }
+}
+
+.post {
+  max-width: 700px;
+  margin: auto;
+
+
+  h1 {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 24px;
+  }
+
+
+  h2 {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 45px 0;
+  }
+
+  p {
+    line-height: 30px;
+    color: var(--gray-100);
+
+    & + p {
+      margin-top: 30px;
+    }
+  }
+
+  .details {
+    display: flex;
+    align-items: center;
+    margin-bottom: 64px;
+    color: var(--gray-300);
+
+    div {
+      display: flex;
+      align-items: center;
+
+      & + div {
+        margin-left: 24px;
+      }
+
+      svg {
+        margin-right: 8px;
+      }
+    }
+  }
+}

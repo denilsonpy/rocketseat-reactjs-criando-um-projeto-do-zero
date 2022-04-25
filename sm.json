@@ -1,0 +1,7 @@
+{
+  "_latest": "0.3.7",
+  "apiEndpoint": "https://blog-projeto-zero.prismic.io/api/v2",
+  "libraries": [
+    "@/slices"
+  ]
+}

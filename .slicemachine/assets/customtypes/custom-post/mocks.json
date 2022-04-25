@@ -1,0 +1,26 @@
+{
+  "id": "bb27ab67-95a1-4c72-bf75-e2eb283c02dd",
+  "uid": "aut-qui-commodi",
+  "type": "custom-post",
+  "data": {
+    "title": "streamline B2B functionalities",
+    "subtitle": "target 24/365 convergence",
+    "banner": {
+      "dimensions": {
+        "width": 900,
+        "height": 500
+      },
+      "alt": "Placeholder image",
+      "copyright": null,
+      "url": "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=900&h=500&fit=crop"
+    },
+    "author": "deliver B2C mindshare",
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "Officia amet enim occaecat sit consectetur sit excepteur aute laboris ex ut. Commodo cupidatat sint sint officia. Ullamco ut est nisi mollit id enim labore labore tempor culpa nisi tempor.",
+        "spans": []
+      }
+    ]
+  }
+}
