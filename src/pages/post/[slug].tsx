@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { FiCalendar, FiClock, FiUser } from 'react-icons/fi';
+import PrismicDom from 'prismic-dom';
 
 import styles from './post.module.scss';
 import commonStyles from '../../styles/common.module.scss';
@@ -9,6 +10,8 @@ import { getPrismicClient } from '../../services/prismic';
 import Header from '../../components/Header';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
+import { useRouter } from 'next/router';
+import { route } from 'next/dist/next-server/server/router';
 
 interface Post {
   first_publication_date: string | null;
@@ -32,82 +35,78 @@ interface PostProps {
 }
 
 export default function Post({ post }: PostProps) {
+  const router = useRouter();
+
+  if (router.isFallback) {
+    return <h1>Carregando...</h1>;
+  }
+
+  const readingTime = Math.ceil(
+    post.data.content.reduce((total, currentItem) => {
+      const mappedHeadingWords = currentItem.heading.split(/ /g).length;
+
+      const mappedBodyWord = currentItem.body
+        .map(item => item.text.split(/ /g).length)
+        .reduce((total, currentItem) => (total += currentItem));
+
+      total += mappedHeadingWords + mappedBodyWord;
+
+      return total;
+    }, 0) / 200
+  );
+
+  const first_publication_date = format(
+    new Date(post.first_publication_date),
+    'dd LLL yyyy',
+    {
+      locale: ptBR,
+    }
+  );
+
   return (
     <>
       <Head>
         <title>{post.data.title} | SpaceTraveling</title>
       </Head>
       <Header />
-      <main className={styles.container}>
-        <img src={post.data.banner.url} alt="banner" />
-        <article className={styles.post}>
-          <h1>{post.data.title}</h1>
-          <div className={styles.details}>
-            <div>
-              <FiCalendar />
-              <time>{post.first_publication_date}</time>
+      {!post ? (
+        'Carregando...'
+      ) : (
+        <main className={styles.container}>
+          <img src={post.data.banner.url} alt="banner" />
+          <article className={styles.post}>
+            <h1>{post.data.title}</h1>
+            <div className={styles.details}>
+              <div>
+                <FiCalendar />
+                <time>{first_publication_date}</time>
+              </div>
+
+              <div>
+                <FiUser />
+                <p>{post.data.author}</p>
+              </div>
+
+              <div>
+                <FiClock />
+                <time>{readingTime} min</time>
+              </div>
             </div>
 
-            <div>
-              <FiUser />
-              <p>{post.data.author}</p>
-            </div>
-
-            <div>
-              <FiClock />
-              <time>4 min</time>
-            </div>
-          </div>
-
-          <div className={styles.postHeader}>
-            <h2>Proin et varius</h2>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-              dolor sapien, vulputate eu diam at, condimentum hendrerit tellus.
-              Nam facilisis sodales felis, pharetra pharetra lectus auctor sed.
-              Ut venenatis mauris vel libero pretium, et pretium ligula
-              faucibus. Morbi nibh felis, elementum a posuere et, vulputate et
-              erat. Nam venenatis.
-            </p>
-          </div>
-
-          <div className={styles.postContent}>
-            <h2>Cras laoreet mi</h2>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-              dolor sapien, vulputate eu diam at, condimentum hendrerit tellus.
-              Nam facilisis sodales felis, pharetra pharetra lectus auctor sed.
-              Ut venenatis mauris vel libero pretium, et pretium ligula
-              faucibus. Morbi nibh felis, elementum a posuere et, vulputate et
-              erat. Nam venenatis.
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-              dolor sapien, vulputate eu diam at, condimentum hendrerit tellus.
-              Nam facilisis sodales felis, pharetra pharetra lectus auctor sed.
-              Ut venenatis mauris vel libero pretium, et pretium ligula
-              faucibus. Morbi nibh felis, elementum a posuere et, vulputate et
-              erat. Nam venenatis.
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-              dolor sapien, vulputate eu diam at, condimentum hendrerit tellus.
-              Nam facilisis sodales felis, pharetra pharetra lectus auctor sed.
-              Ut venenatis mauris vel libero pretium, et pretium ligula
-              faucibus. Morbi nibh felis, elementum a posuere et, vulputate et
-              erat. Nam venenatis.
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-              dolor sapien, vulputate eu diam at, condimentum hendrerit tellus.
-              Nam facilisis sodales felis, pharetra pharetra lectus auctor sed.
-              Ut venenatis mauris vel libero pretium, et pretium ligula
-              faucibus. Morbi nibh felis, elementum a posuere et, vulputate et
-              erat. Nam venenatis.
-            </p>
-          </div>
-        </article>
-      </main>
+            {post.data.content.map((content, index) => (
+              <article key={index}>
+                <h2>{content.heading}</h2>
+                <div
+                  className={styles.post}
+                  dangerouslySetInnerHTML={{
+                    __html: PrismicDom.RichText.asHtml(content.body),
+                  }}
+                />
+              </article>
+            ))}
+          </article>
+        </main>
+      )}
     </>
   );
 }
@@ -130,27 +129,24 @@ export const getStaticProps = async ({ params }) => {
 
   const prismic = getPrismicClient({});
   const postResponse = await prismic.getByUID('custom-post', String(slug), {});
-  console.log(postResponse.data.body);
+
   const post = {
-    first_publication_date: format(
-      new Date(postResponse.first_publication_date),
-      'dd LLL yyyy',
-      {
-        locale: ptBR,
-      }
-    ),
+    uid: postResponse.uid,
+    first_publication_date: postResponse.first_publication_date,
+    title: postResponse.data.title,
     data: {
       title: postResponse.data.title,
       subtitle: postResponse.data.subtitle,
+      author: postResponse.data.author,
       banner: {
         url: postResponse.data.banner.url,
       },
-      author: postResponse.data.author,
-      content: postResponse.data.body,
+      content: postResponse.data.content.map(content => ({
+        heading: content.heading,
+        body: [...content.body],
+      })),
     },
   };
-
-  console.log(post);
 
   return {
     props: {

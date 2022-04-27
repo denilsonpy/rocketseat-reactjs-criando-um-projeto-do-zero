@@ -1,10 +1,10 @@
 {
-  "id": "bb27ab67-95a1-4c72-bf75-e2eb283c02dd",
-  "uid": "aut-qui-commodi",
+  "id": "dfc9d8f6-6179-47c7-b1a6-c9a0dd5215fe",
+  "uid": "doloribus-aut-natus",
   "type": "custom-post",
   "data": {
-    "title": "streamline B2B functionalities",
-    "subtitle": "target 24/365 convergence",
+    "title": "incentivize next-generation initiatives",
+    "subtitle": "embrace sticky solutions",
     "banner": {
       "dimensions": {
         "width": 900,
@@ -12,14 +12,69 @@
       },
       "alt": "Placeholder image",
       "copyright": null,
-      "url": "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=900&h=500&fit=crop"
+      "url": "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=900&h=500&fit=crop"
     },
-    "author": "deliver B2C mindshare",
+    "author": "leverage extensible architectures",
     "content": [
       {
-        "type": "paragraph",
-        "text": "Officia amet enim occaecat sit consectetur sit excepteur aute laboris ex ut. Commodo cupidatat sint sint officia. Ullamco ut est nisi mollit id enim labore labore tempor culpa nisi tempor.",
-        "spans": []
+        "heading": "recontextualize global deliverables",
+        "body": [
+          {
+            "type": "paragraph",
+            "text": "Laboris minim nostrud adipisicing eiusmod cupidatat occaecat mollit. Eu aute reprehenderit minim sunt.",
+            "spans": []
+          }
+        ]
+      },
+      {
+        "heading": "synergize seamless e-business",
+        "body": [
+          {
+            "type": "paragraph",
+            "text": "Lorem eiusmod do et eiusmod voluptate exercitation ad magna officia laborum elit sunt esse.",
+            "spans": []
+          }
+        ]
+      },
+      {
+        "heading": "whiteboard holistic platforms",
+        "body": [
+          {
+            "type": "paragraph",
+            "text": "Irure dolore cupidatat cillum aliquip. Lorem minim et sunt dolor officia reprehenderit.",
+            "spans": []
+          }
+        ]
+      },
+      {
+        "heading": "enable world-class communities",
+        "body": [
+          {
+            "type": "paragraph",
+            "text": "Ad veniam duis laborum amet reprehenderit id elit quis tempor ea in esse aliqua. Cillum eu tempor sint non aute ea ex aliqua aliquip veniam quis laboris deserunt cupidatat et. Reprehenderit mollit culpa pariatur proident ipsum ut non fugiat veniam tempor sint laboris.",
+            "spans": []
+          }
+        ]
+      },
+      {
+        "heading": "leverage strategic infrastructures",
+        "body": [
+          {
+            "type": "paragraph",
+            "text": "Amet non duis ad irure consequat aute fugiat consectetur velit cillum pariatur est anim reprehenderit.",
+            "spans": []
+          }
+        ]
+      },
+      {
+        "heading": "matrix rich action-items",
+        "body": [
+          {
+            "type": "paragraph",
+            "text": "Culpa anim ullamco aliquip esse voluptate reprehenderit anim officia anim enim dolore veniam in. Consequat in labore consectetur exercitation esse eiusmod irure dolor laboris laborum aute est. Aute nulla eu sunt Lorem dolore incididunt Lorem deserunt deserunt laboris duis laboris.",
+            "spans": []
+          }
+        ]
       }
     ]
   }

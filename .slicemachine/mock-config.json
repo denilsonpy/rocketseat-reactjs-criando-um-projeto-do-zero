@@ -2,9 +2,11 @@
   "_cts": {
     "custom-post": {
       "content": {
-        "config": {
-          "patternType": "PARAGRAPH",
-          "blocks": 1
+        "body": {
+          "config": {
+            "patternType": "PARAGRAPH",
+            "blocks": 1
+          }
         }
       }
     },
